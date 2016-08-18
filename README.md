@@ -19,11 +19,15 @@ To cluster the Quartz jobs, we need a DB job store. Since we already have the Mo
 * Using MongoDB as the job store so we can deploy the cron jobs in a cluster environment.
 The configurations of MongoDB and Job store are in the quartz.properties.
 
-* Dynamically change the job schedule by API call
-
 * Auto wire the service into job class to run the job. 
 
 * No business logic in the Cron Job.
+
+* Dynamically change the job schedule by API call
+
+* Pause/Resume triggers by API call
+
+
 
 
 
