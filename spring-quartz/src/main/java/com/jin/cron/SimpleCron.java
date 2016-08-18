@@ -23,9 +23,8 @@ public class SimpleCron extends AbsMyCronImpl{
 	@PostConstruct
     void init() {
 		cronTriggerFactoryBean = simpleCronTriggerFactoryBean();
-        schedulerService.register(simpleJobDetailFactory().getObject(), simpleCronTriggerFactoryBean().getObject());
-        logger.info("Regirster trigger " +  simpleCronTriggerFactoryBean().getObject().getKey() + " with schedule " + simpleCronTriggerFactoryBean().getObject().getCronExpression());
-
+		jobDetailFactoryBean = simpleJobDetailFactory();
+        register();
     }
 	
 	@Bean

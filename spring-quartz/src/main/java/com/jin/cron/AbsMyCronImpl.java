@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
+import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 
 import com.jin.service.SchedulerService;
 
@@ -18,7 +19,14 @@ public abstract class AbsMyCronImpl implements MyCron{
 	SchedulerService schedulerService;
 	
 	protected CronTriggerFactoryBean cronTriggerFactoryBean;
+	protected JobDetailFactoryBean jobDetailFactoryBean;
 	
+	
+	public void register(){
+        schedulerService.register(jobDetailFactoryBean.getObject(), cronTriggerFactoryBean.getObject());
+        logger.info("Regirster trigger " +  cronTriggerFactoryBean.getObject().getKey() + " with schedule " + cronTriggerFactoryBean.getObject().getCronExpression());
+
+	}
 	
     public void reschedule( String cronExpression ) {    	
     	try {

@@ -23,12 +23,11 @@ public class AnotherCron extends AbsMyCronImpl {
 	@PostConstruct
     void init() {
 		cronTriggerFactoryBean = anotherCronTriggerFactoryBean();
-        schedulerService.register(anotherJobDetailFactory().getObject(), anotherCronTriggerFactoryBean().getObject());
-        logger.info("Regirster trigger " +  anotherCronTriggerFactoryBean().getObject().getKey() + " with schedule " + anotherCronTriggerFactoryBean().getObject().getCronExpression());
+		jobDetailFactoryBean = anotherJobDetailFactory();
+        register();
 
     }
 	
-    
 	@Bean
 	public JobDetailFactoryBean anotherJobDetailFactory() {
 		JobDetailFactoryBean jobDetailFactory = new JobDetailFactoryBean();
@@ -39,7 +38,6 @@ public class AnotherCron extends AbsMyCronImpl {
 		return jobDetailFactory;
 		
 	}
-	
 
 	@Bean
 	public CronTriggerFactoryBean anotherCronTriggerFactoryBean() {
@@ -51,7 +49,6 @@ public class AnotherCron extends AbsMyCronImpl {
 		cronTriggerFactoryBean.setGroup("JinJob");
 		return cronTriggerFactoryBean;
 	}
-	
 	
 	public static class AnotherJob implements Job {
 		
