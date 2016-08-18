@@ -99,11 +99,11 @@ public class SchedulerServiceImpl implements SchedulerService{
 			
 			if(scheduler.getScheduler().checkExists(cronTrigger.getKey())){
 				// Option one:
-				//scheduler.getScheduler().rescheduleJob(cronTrigger.getKey(), cronTrigger);
+				scheduler.getScheduler().rescheduleJob(cronTrigger.getKey(), cronTrigger);
 				logger.info("Quartz Scheduler resume trigger " + cronTrigger.getKey());
 				
 				//Option two:
-				scheduler.getScheduler().resumeTrigger(cronTrigger.getKey());
+				//scheduler.getScheduler().resumeTrigger(cronTrigger.getKey());
 			}else{
 				scheduler.getScheduler().scheduleJob(jobDetail, cronTrigger);
 				logger.info("Quartz Scheduler register new trigger " +  cronTrigger.getKey());
@@ -124,6 +124,31 @@ public class SchedulerServiceImpl implements SchedulerService{
 		} catch (SchedulerException e) {
 			logger.error("Quartz Scheduler can not reschedule trigger " +  cronTrigger.getKey() + ". the error is " + e.getMessage(), e);
 		}
+		
+	}
+
+	@Override
+	public void pause(CronTrigger cronTrigger) {
+		try{
+			logger.info("Pause trigger " + cronTrigger.getKey());
+			scheduler.getScheduler().pauseTrigger(cronTrigger.getKey());
+			
+		} catch (Exception e) {
+			logger.error("Quartz Scheduler can not pause trigger " +  cronTrigger.getKey() + ". the error is " + e.getMessage(), e);
+		}
+		
+	}
+
+	@Override
+	public void resume(CronTrigger cronTrigger) {
+		try{
+			logger.info("Pause trigger " + cronTrigger.getKey());
+			scheduler.getScheduler().resumeTrigger(cronTrigger.getKey());
+			
+		} catch (Exception e) {
+			logger.error("Quartz Scheduler can not resume trigger " +  cronTrigger.getKey() + ". the error is " + e.getMessage(), e);
+		}
+		
 		
 	}
 
