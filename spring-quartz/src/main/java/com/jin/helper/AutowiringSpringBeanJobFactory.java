@@ -5,12 +5,14 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public final class AutowiringSpringBeanJobFactory extends SpringBeanJobFactory implements ApplicationContextAware {
 
 	private transient AutowireCapableBeanFactory beanFactory;
 
-	@Override
+    @Override
 	public void setApplicationContext(final ApplicationContext context) {
 		beanFactory = context.getAutowireCapableBeanFactory();
 	}
