@@ -1,4 +1,4 @@
-#Spring Boot + Quartz + MongoDB
+# Spring Boot + Quartz + MongoDB
 ## Spring Boot
 
 This is a sample application which will be deployed in a cluster environment. We implement it with Spring Boot.
